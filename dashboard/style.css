@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI";
+  display: flex;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+
+.sidebar {
+  width: 240px;
+  padding: 20px;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar .active {
+  background: #22c55e;
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  margin: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.highlight {
+  background: #6366f1;
+  padding: 20px;
+}
