@@ -1,45 +1,71 @@
 const express = require("express");
-const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
 
-// ✅ CORS (allow all)
-app.use(cors({ origin: "*" }));
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-// ✅ Serve frontend (optional locally)
+// File path
+const DATA_FILE = path.join(__dirname, "data.json");
+
+// Helper functions
+function readData() {
+  const data = fs.readFileSync(DATA_FILE);
+  return JSON.parse(data);
+}
+
+function writeData(data) {
+  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+}
+
+// ================= API ROUTES =================
+
+// Get all data
+app.get("/api/data", (req, res) => {
+  const data = readData();
+  res.json(data);
+});
+
+// Add doctor
+app.post("/api/doctors", (req, res) => {
+  const data = readData();
+  const newDoctor = req.body;
+
+  data.doctors.push(newDoctor);
+  writeData(data);
+
+  res.json({ message: "Doctor added", data });
+});
+
+// Add room
+app.post("/api/rooms", (req, res) => {
+  const data = readData();
+  const newRoom = req.body;
+
+  data.rooms.push(newRoom);
+  writeData(data);
+
+  res.json({ message: "Room added", data });
+});
+
+// ================= SERVE FRONTEND =================
+
+// Serve static files (HTML, CSS, JS)
 app.use(express.static(path.join(__dirname, "dashboard")));
 
-// ✅ GET data
-app.get("/queue", (req, res) => {
-  try {
-    const data = JSON.parse(fs.readFileSync("data.json", "utf-8"));
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to read data" });
-  }
+// Fallback route (important)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dashboard", "index.html"));
 });
 
-// ✅ UPDATE data
-app.post("/update", (req, res) => {
-  try {
-    fs.writeFileSync("data.json", JSON.stringify(req.body, null, 2));
-    res.json({ message: "Updated successfully" });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to update data" });
-  }
-});
+// ================= START SERVER =================
 
-// ✅ Root route
-app.get("/", (req, res) => {
-  res.send("Hospital API is running...");
-});
-
-// ✅ Dynamic PORT (REQUIRED for Render)
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+  console.log(`Server running on port ${PORT}`);
 });

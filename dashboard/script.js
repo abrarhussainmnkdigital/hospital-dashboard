@@ -1,4 +1,4 @@
-const BASE_URL = "https://YOUR_BACKEND_URL.onrender.com";
+const BASE_URL = "";
 
 let doctors = [];
 let currentDoctorIndex = 0;
