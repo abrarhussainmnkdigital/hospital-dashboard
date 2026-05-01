@@ -1,71 +1,54 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const cors = require("cors");
 
 const app = express();
-
-// Middleware
-app.use(cors());
 app.use(express.json());
 
-// File path
+// ===== DATA FILE =====
 const DATA_FILE = path.join(__dirname, "data.json");
 
-// Helper functions
 function readData() {
-  const data = fs.readFileSync(DATA_FILE);
-  return JSON.parse(data);
+  return JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
 }
 
 function writeData(data) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
-// ================= API ROUTES =================
+// ===== API ROUTES =====
 
 // Get all data
 app.get("/api/data", (req, res) => {
-  const data = readData();
-  res.json(data);
+  res.json(readData());
 });
 
 // Add doctor
 app.post("/api/doctors", (req, res) => {
   const data = readData();
-  const newDoctor = req.body;
-
-  data.doctors.push(newDoctor);
+  data.doctors.push(req.body);
   writeData(data);
-
-  res.json({ message: "Doctor added", data });
+  res.json({ message: "Doctor added" });
 });
 
 // Add room
 app.post("/api/rooms", (req, res) => {
   const data = readData();
-  const newRoom = req.body;
-
-  data.rooms.push(newRoom);
+  data.rooms.push(req.body);
   writeData(data);
-
-  res.json({ message: "Room added", data });
+  res.json({ message: "Room added" });
 });
 
-// ================= SERVE FRONTEND =================
-
-// Serve static files (HTML, CSS, JS)
+// ===== SERVE FRONTEND =====
 app.use(express.static(path.join(__dirname, "dashboard")));
 
-// Fallback route (important)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dashboard", "index.html"));
 });
 
-// ================= START SERVER =================
-
+// ===== START SERVER =====
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log("Server running on port " + PORT);
 });

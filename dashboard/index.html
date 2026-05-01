@@ -6,56 +6,11 @@
 </head>
 <body>
 
-<div class="sidebar">
-  <h2>🏥 MediCare+</h2>
-  <ul>
-    <li onclick="showPage('home', this)" class="active">Dashboard</li>
-    <li onclick="showPage('doctors', this)">Doctors</li>
-    <li onclick="showPage('queue', this)">Queue</li>
-    <li onclick="showPage('admin', this)">Admin Panel</li>
-  </ul>
-</div>
+<h1>Hospital Dashboard</h1>
 
-<div class="main">
-  <div class="topbar">
-    <h1 id="page-title">Dashboard</h1>
-    <div id="time"></div>
-  </div>
-
-  <div id="home" class="page active">
-    <select id="doctorSelect" onchange="changeDoctor()"></select>
-
-    <div class="highlight">
-      <h2 id="patientName">--</h2>
-      <p id="patientAge"></p>
-    </div>
-
-    <div class="grid">
-      <div class="card"><h3>Doctor</h3><p id="doctor"></p></div>
-      <div class="card"><h3>Room</h3><p id="room"></p></div>
-      <div class="card"><h3>Completed Tests</h3><ul id="completed"></ul></div>
-      <div class="card"><h3>Pending Tests</h3><ul id="pending"></ul></div>
-    </div>
-  </div>
-
-  <div id="doctors" class="page">
-    <h2>Doctors Overview</h2>
-    <div id="doctorCards"></div>
-  </div>
-
-  <div id="queue" class="page">
-    <h2>Queue</h2>
-    <ul id="queueList"></ul>
-  </div>
-
-  <div id="admin" class="page">
-    <h2>Admin Panel</h2>
-    <input id="name" placeholder="Patient Name">
-    <input id="age" placeholder="Age">
-    <button onclick="updatePatient()">Update Patient</button>
-  </div>
-</div>
+<div id="doctors"></div>
 
 <script src="script.js"></script>
+
 </body>
 </html>

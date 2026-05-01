@@ -1,31 +1,22 @@
 {
   "doctors": [
     {
-      "name": "Dr. Ahmed",
+      "name": "Dr Ahmed",
       "room": "Room 1",
-      "current_patient": {
-        "name": "Ali Khan",
-        "age": 45,
-        "completed_tests": ["Blood Test", "X-Ray"],
-        "pending_tests": ["MRI", "ECG"]
-      },
-      "queue": [
-        { "name": "Sara Ali", "issue": "Fever" },
-        { "name": "Usman Tariq", "issue": "Chest Pain" }
+      "patients": [
+        {
+          "name": "Ali",
+          "status": "Consultation",
+          "tests_done": ["Blood Test"],
+          "tests_pending": ["X-Ray"]
+        }
       ]
-    },
+    }
+  ],
+  "rooms": [
     {
-      "name": "Dr. Sara",
-      "room": "Room 2",
-      "current_patient": {
-        "name": "Hassan Raza",
-        "age": 30,
-        "completed_tests": ["ECG"],
-        "pending_tests": ["CT Scan"]
-      },
-      "queue": [
-        { "name": "Fatima Noor", "issue": "Headache" }
-      ]
+      "roomNo": "101",
+      "type": "ICU"
     }
   ]
 }
