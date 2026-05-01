@@ -1,4 +1,4 @@
-function showSection(id) {
+function showSection(event, id) {
   document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
 
@@ -39,14 +39,19 @@ function loadData() {
 
           /* RECENT */
           recent.innerHTML += `
-            <p><b>${p.name}</b> (${p.age}) - ${p.status}</p>
+            <p>
+              <b>${p.name}</b> (${p.id}) - ${p.status}<br>
+              <small>${p.condition} | ${doc.name}</small>
+            </p>
           `;
 
           /* PATIENT CARDS */
           cards.innerHTML += `
             <div class="card">
               <h3>${p.name}</h3>
-              <p>Age: ${p.age}</p>
+              <p>ID: ${p.id}</p>
+              <p>Age: ${p.age} | ${p.gender}</p>
+              <p>Condition: ${p.condition}</p>
               <p>Status: ${p.status}</p>
               <p>Doctor: ${doc.name}</p>
               <p>Room: ${doc.room}</p>
@@ -61,13 +66,32 @@ function loadData() {
               <p>Heart Rate: ${p.heart_rate || 72} bpm</p>
               <p>Blood Pressure: ${p.bp || "120/80"}</p>
               <p>Diabetic: ${p.diabetic ? "Yes" : "No"}</p>
+              <p>Condition: ${p.condition}</p>
             </div>
           `;
 
-          /* TESTS */
+          /* COMPLETED TESTS */
+          p.tests_completed.forEach(t => {
+            testBox.innerHTML += `
+              <div class="testCard">
+                <b>${p.name}</b> (${p.id})<br>
+                Test: ${t.name}<br>
+                Result:
+                <span class="${t.result === 'Positive' ? 'test-positive' : 'test-negative'}">
+                  ${t.result}
+                </span>
+              </div>
+            `;
+          });
+
+          /* PENDING TESTS */
           p.tests_pending.forEach(t => {
             testBox.innerHTML += `
-              <p>${t} - <b>${p.name}</b></p>
+              <div class="testCard">
+                <b>${p.name}</b> (${p.id})<br>
+                Test: ${t}<br>
+                Status: <span class="test-pending">Pending</span>
+              </div>
             `;
           });
 

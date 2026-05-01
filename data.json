@@ -5,22 +5,34 @@
       "room": "101",
       "patients": [
         {
+          "id": "P-1001",
           "name": "Ali Raza",
           "age": 34,
+          "gender": "Male",
           "status": "Waiting",
+          "condition": "Fever",
           "heart_rate": 78,
           "bp": "130/85",
           "diabetic": true,
-          "tests_pending": ["Blood Test"]
+          "tests_pending": ["Blood Test"],
+          "tests_completed": [
+            { "name": "COVID Test", "result": "Negative" }
+          ]
         },
         {
+          "id": "P-1002",
           "name": "Sara Malik",
           "age": 27,
+          "gender": "Female",
           "status": "Consultation",
+          "condition": "Chest Pain",
           "heart_rate": 72,
           "bp": "120/80",
           "diabetic": false,
-          "tests_pending": ["X-Ray"]
+          "tests_pending": ["X-Ray"],
+          "tests_completed": [
+            { "name": "ECG", "result": "Normal" }
+          ]
         }
       ]
     }

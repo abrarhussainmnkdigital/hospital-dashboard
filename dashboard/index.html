@@ -15,17 +15,16 @@
     </div>
 
     <ul>
-      <li onclick="showSection('overview')" class="active">🏠 Overview</li>
-      <li onclick="showSection('patients')">🧑 Patients</li>
-      <li onclick="showSection('tests')">🧪 Tests & Reports</li>
-      <li onclick="showSection('admin')">⚙️ Admin Panel</li>
+      <li onclick="showSection(event,'overview')" class="active">🏠 Overview</li>
+      <li onclick="showSection(event,'patients')">🧑 Patients</li>
+      <li onclick="showSection(event,'tests')">🧪 Tests & Reports</li>
+      <li onclick="showSection(event,'admin')">⚙️ Admin Panel</li>
     </ul>
   </div>
 
   <!-- MAIN -->
   <div class="main">
 
-    <!-- TOP -->
     <div class="topbar">
       <h2>Patient Monitoring Dashboard</h2>
       <p>Real-time insights of patient health, vitals & activity</p>
@@ -76,7 +75,7 @@
 
     <!-- TESTS -->
     <div id="tests" class="section hidden">
-      <h2>Pending Tests</h2>
+      <h2>Tests & Reports</h2>
       <div id="testData"></div>
     </div>
 
