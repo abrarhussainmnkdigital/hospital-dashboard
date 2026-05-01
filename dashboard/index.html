@@ -1,31 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Patient Dashboard</title>
+  <title>Novacare Hospital</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- HEADER -->
+<div class="header">
+  <img src="logo.png" class="logo">
+  <div>
+    <h2>Novacare Hospital</h2>
+    <p>Islamabad</p>
+  </div>
+</div>
+
 <div class="container">
 
-  <!-- Sidebar -->
+  <!-- SIDEBAR -->
   <div class="sidebar">
-    <h2>🏥 MedPanel</h2>
     <ul>
-      <li class="active">🏠 Overview</li>
-      <li>🧑 Patients</li>
-      <li>🧪 Tests</li>
-      <li>🏥 Rooms</li>
-      <li>⚙️ Admin</li>
+      <li onclick="showSection('overview')">🏠 Overview</li>
+      <li onclick="showSection('patients')">🧑 Patients</li>
+      <li onclick="showSection('tests')">🧪 Tests</li>
     </ul>
   </div>
 
-  <!-- Main -->
+  <!-- MAIN -->
   <div class="main">
 
-    <h1>Patient Monitoring Dashboard</h1>
+    <!-- OVERVIEW -->
+    <div id="overview" class="section">
+      <h1>Dashboard Overview</h1>
 
-    <div id="patients" class="cards"></div>
+      <div class="stats">
+        <div class="stat">Total Patients: <span id="total"></span></div>
+        <div class="stat">Waiting: <span id="waiting"></span></div>
+        <div class="stat">In Consultation: <span id="consult"></span></div>
+        <div class="stat">Pending Tests: <span id="tests"></span></div>
+      </div>
+    </div>
+
+    <!-- PATIENTS -->
+    <div id="patients" class="section hidden">
+      <h1>Patients</h1>
+      <div id="patientCards" class="cards"></div>
+    </div>
+
+    <!-- TESTS -->
+    <div id="tests" class="section hidden">
+      <h1>Tests Overview</h1>
+      <div id="testData"></div>
+    </div>
 
   </div>
 

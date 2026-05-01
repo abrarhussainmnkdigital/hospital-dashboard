@@ -1,69 +1,74 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI';
+  font-family: Arial;
   background: #0f172a;
   color: white;
 }
 
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #9333ea;
+  padding: 15px;
+}
+
+.logo {
+  height: 50px;
+}
+
+/* LAYOUT */
 .container {
   display: flex;
 }
 
-/* Sidebar */
 .sidebar {
-  width: 250px;
+  width: 220px;
   background: #020617;
   height: 100vh;
-  padding: 20px;
-}
-
-.sidebar h2 {
-  margin-bottom: 30px;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
 }
 
 .sidebar li {
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 8px;
+  padding: 15px;
   cursor: pointer;
 }
 
-.sidebar li:hover,
-.sidebar .active {
+.sidebar li:hover {
   background: #1e293b;
 }
 
-/* Main */
 .main {
   flex: 1;
-  padding: 30px;
+  padding: 20px;
 }
 
-/* Cards */
+/* SECTIONS */
+.hidden {
+  display: none;
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* CARDS */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
   gap: 20px;
 }
 
 .card {
-  background: rgba(255,255,255,0.05);
-  padding: 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-}
-
-.status {
-  padding: 5px 10px;
+  background: #1e293b;
+  padding: 15px;
   border-radius: 10px;
-  font-size: 12px;
 }
-
-.status.waiting { background: orange; }
-.status.consultation { background: green; }
-.status.testing { background: blue; }
