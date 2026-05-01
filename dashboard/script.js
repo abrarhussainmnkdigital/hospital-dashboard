@@ -1,41 +1,43 @@
-// No external backend needed
-const BASE_URL = "";
-
 function loadData() {
   fetch("/api/data")
     .then(res => res.json())
     .then(data => {
-      const container = document.getElementById("doctors");
+      const container = document.getElementById("patients");
       container.innerHTML = "";
 
       data.doctors.forEach(doc => {
-        const div = document.createElement("div");
-        div.className = "card";
-
-        let patientsHTML = "";
         doc.patients.forEach(p => {
-          patientsHTML += `
-            <p><strong>${p.name}</strong> - ${p.status}</p>
-            <p>Done: ${p.tests_done.join(", ")}</p>
-            <p>Pending: ${p.tests_pending.join(", ")}</p>
-            <hr>
+
+          const div = document.createElement("div");
+          div.className = "card";
+
+          div.innerHTML = `
+            <h2>${p.name}</h2>
+
+            <p><strong>Status:</strong> 
+              <span class="status ${p.status.toLowerCase()}">
+                ${p.status}
+              </span>
+            </p>
+
+            <p><strong>Doctor:</strong> ${doc.name}</p>
+            <p><strong>Room:</strong> ${doc.room}</p>
+
+            <p><strong>Tests Done:</strong><br>
+              ${p.tests_done.join(", ")}
+            </p>
+
+            <p><strong>Pending Tests:</strong><br>
+              ${p.tests_pending.join(", ")}
+            </p>
           `;
+
+          container.appendChild(div);
         });
-
-        div.innerHTML = `
-          <h2>${doc.name}</h2>
-          <p>Room: ${doc.room}</p>
-          ${patientsHTML}
-        `;
-
-        container.appendChild(div);
       });
-    })
-    .catch(err => console.error(err));
+    });
 }
 
-// Auto refresh every 3 seconds
+// Auto refresh
 setInterval(loadData, 3000);
-
-// Initial load
 loadData();

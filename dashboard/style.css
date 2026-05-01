@@ -1,16 +1,69 @@
 body {
-  font-family: Arial;
-  background: #f5f5f5;
+  margin: 0;
+  font-family: 'Segoe UI';
+  background: #0f172a;
+  color: white;
+}
+
+.container {
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #020617;
+  height: 100vh;
   padding: 20px;
 }
 
-h1 {
-  text-align: center;
+.sidebar h2 {
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sidebar li:hover,
+.sidebar .active {
+  background: #1e293b;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .card {
-  background: white;
-  padding: 15px;
-  margin: 10px;
-  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
 }
+
+.status {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.status.waiting { background: orange; }
+.status.consultation { background: green; }
+.status.testing { background: blue; }

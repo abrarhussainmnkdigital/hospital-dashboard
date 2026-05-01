@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hospital Dashboard</title>
+  <title>Patient Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Hospital Dashboard</h1>
+<div class="container">
 
-<div id="doctors"></div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>🏥 MedPanel</h2>
+    <ul>
+      <li class="active">🏠 Overview</li>
+      <li>🧑 Patients</li>
+      <li>🧪 Tests</li>
+      <li>🏥 Rooms</li>
+      <li>⚙️ Admin</li>
+    </ul>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <h1>Patient Monitoring Dashboard</h1>
+
+    <div id="patients" class="cards"></div>
+
+  </div>
+
+</div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
