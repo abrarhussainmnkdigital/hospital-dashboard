@@ -1,22 +1,28 @@
 {
   "doctors": [
     {
-      "name": "Dr Ahmed",
-      "room": "Room 1",
+      "name": "Dr. Ahmed Khan",
+      "room": "101",
       "patients": [
         {
-          "name": "Ali",
+          "name": "Ali Raza",
+          "age": 34,
+          "status": "Waiting",
+          "heart_rate": 78,
+          "bp": "130/85",
+          "diabetic": true,
+          "tests_pending": ["Blood Test"]
+        },
+        {
+          "name": "Sara Malik",
+          "age": 27,
           "status": "Consultation",
-          "tests_done": ["Blood Test"],
+          "heart_rate": 72,
+          "bp": "120/80",
+          "diabetic": false,
           "tests_pending": ["X-Ray"]
         }
       ]
-    }
-  ],
-  "rooms": [
-    {
-      "roomNo": "101",
-      "type": "ICU"
     }
   ]
 }

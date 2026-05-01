@@ -15,11 +15,19 @@ function loadData() {
 
       const recent = document.getElementById("recentPatients");
       const cards = document.getElementById("patientCards");
+      const health = document.getElementById("healthData");
+      const testBox = document.getElementById("testData");
 
       recent.innerHTML = "";
       cards.innerHTML = "";
+      health.innerHTML = "";
+      testBox.innerHTML = "";
+
+      document.getElementById("doctorCount").innerText = data.doctors.length;
+      document.getElementById("roomCount").innerText = data.doctors.length;
 
       data.doctors.forEach(doc => {
+
         doc.patients.forEach(p => {
 
           total++;
@@ -29,24 +37,42 @@ function loadData() {
 
           tests += p.tests_pending.length;
 
-          /* RECENT LIST */
-          const row = document.createElement("div");
-          row.innerHTML = `
-            <p><b>${p.name}</b> - ${p.status} (${doc.name})</p>
+          /* RECENT */
+          recent.innerHTML += `
+            <p><b>${p.name}</b> (${p.age}) - ${p.status}</p>
           `;
-          recent.appendChild(row);
 
-          /* CARDS */
-          const card = document.createElement("div");
-          card.className = "card";
-          card.innerHTML = `
-            <h3>${p.name}</h3>
-            <p>Status: ${p.status}</p>
-            <p>Doctor: ${doc.name}</p>
-            <p>Room: ${doc.room}</p>
+          /* PATIENT CARDS */
+          cards.innerHTML += `
+            <div class="card">
+              <h3>${p.name}</h3>
+              <p>Age: ${p.age}</p>
+              <p>Status: ${p.status}</p>
+              <p>Doctor: ${doc.name}</p>
+              <p>Room: ${doc.room}</p>
+            </div>
           `;
-          cards.appendChild(card);
+
+          /* HEALTH */
+          health.innerHTML += `
+            <div class="healthCard">
+              <h4>${p.name}</h4>
+              <p>Age: ${p.age}</p>
+              <p>Heart Rate: ${p.heart_rate || 72} bpm</p>
+              <p>Blood Pressure: ${p.bp || "120/80"}</p>
+              <p>Diabetic: ${p.diabetic ? "Yes" : "No"}</p>
+            </div>
+          `;
+
+          /* TESTS */
+          p.tests_pending.forEach(t => {
+            testBox.innerHTML += `
+              <p>${t} - <b>${p.name}</b></p>
+            `;
+          });
+
         });
+
       });
 
       document.getElementById("total").innerText = total;

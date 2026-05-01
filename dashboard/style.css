@@ -23,8 +23,8 @@ body {
   margin-bottom: 30px;
 }
 
-.logoBox img {
-  width: 60px;
+.logo {
+  width: 120px;
 }
 
 .sidebar ul {
@@ -34,7 +34,7 @@ body {
 
 .sidebar li {
   padding: 12px;
-  margin: 5px 0;
+  margin: 8px 0;
   cursor: pointer;
   border-radius: 8px;
 }
@@ -51,8 +51,13 @@ body {
 }
 
 /* TOPBAR */
-.topbar {
-  margin-bottom: 20px;
+.topbar h2 {
+  margin: 0;
+}
+
+.topbar p {
+  color: #94a3b8;
+  margin-top: 5px;
 }
 
 /* CARDS */
@@ -65,8 +70,14 @@ body {
 .card {
   padding: 20px;
   border-radius: 15px;
+  background: #1e293b;
 }
 
+.card h1 {
+  margin-top: 10px;
+}
+
+/* COLORS */
 .purple { background: linear-gradient(45deg, #9333ea, #6366f1); }
 .blue { background: linear-gradient(45deg, #2563eb, #06b6d4); }
 .green { background: linear-gradient(45deg, #16a34a, #22c55e); }
@@ -80,9 +91,17 @@ body {
   border-radius: 15px;
 }
 
-/* PATIENT CARD */
-.card h1 {
-  margin: 10px 0 0;
+/* HEALTH CARDS */
+.healthCard {
+  background: #0f172a;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+/* STATUS */
+.status-green {
+  color: #22c55e;
 }
 
 /* HIDDEN */
