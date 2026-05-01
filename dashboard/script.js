@@ -11,7 +11,7 @@ function loadData() {
     .then(res => res.json())
     .then(data => {
 
-      let total = 0, waiting = 0, consult = 0, tests = 0;
+      let total = 0, waiting = 0, consult = 0, testsCount = 0;
 
       const recent = document.getElementById("recentPatients");
       const cards = document.getElementById("patientCards");
@@ -23,25 +23,25 @@ function loadData() {
       health.innerHTML = "";
       testBox.innerHTML = "";
 
-      document.getElementById("doctorCount").innerText = data.doctors.length;
-      document.getElementById("roomCount").innerText = data.doctors.length;
+      document.getElementById("doctorCount").innerText = data.doctors?.length || 0;
+      document.getElementById("roomCount").innerText = data.doctors?.length || 0;
 
-      data.doctors.forEach(doc => {
+      data.doctors?.forEach(doc => {
 
-        doc.patients.forEach(p => {
+        doc.patients?.forEach(p => {
 
           total++;
 
           if (p.status === "Waiting") waiting++;
           if (p.status === "Consultation") consult++;
 
-          tests += p.tests_pending.length;
+          testsCount += (p.tests_pending?.length || 0);
 
           /* RECENT */
           recent.innerHTML += `
             <p>
-              <b>${p.name}</b> (${p.id}) - ${p.status}<br>
-              <small>${p.condition} | ${doc.name}</small>
+              <b>${p.name}</b> (${p.id || "N/A"}) - ${p.status}<br>
+              <small>${p.condition || ""} | ${doc.name}</small>
             </p>
           `;
 
@@ -49,9 +49,9 @@ function loadData() {
           cards.innerHTML += `
             <div class="card">
               <h3>${p.name}</h3>
-              <p>ID: ${p.id}</p>
-              <p>Age: ${p.age} | ${p.gender}</p>
-              <p>Condition: ${p.condition}</p>
+              <p>ID: ${p.id || "N/A"}</p>
+              <p>Age: ${p.age || "-"} | ${p.gender || "-"}</p>
+              <p>Condition: ${p.condition || "-"}</p>
               <p>Status: ${p.status}</p>
               <p>Doctor: ${doc.name}</p>
               <p>Room: ${doc.room}</p>
@@ -62,48 +62,61 @@ function loadData() {
           health.innerHTML += `
             <div class="healthCard">
               <h4>${p.name}</h4>
-              <p>Age: ${p.age}</p>
               <p>Heart Rate: ${p.heart_rate || 72} bpm</p>
               <p>Blood Pressure: ${p.bp || "120/80"}</p>
               <p>Diabetic: ${p.diabetic ? "Yes" : "No"}</p>
-              <p>Condition: ${p.condition}</p>
+              <p>Condition: ${p.condition || "-"}</p>
             </div>
           `;
 
           /* COMPLETED TESTS */
-          p.tests_completed.forEach(t => {
-            testBox.innerHTML += `
-              <div class="testCard">
-                <b>${p.name}</b> (${p.id})<br>
-                Test: ${t.name}<br>
-                Result:
-                <span class="${t.result === 'Positive' ? 'test-positive' : 'test-negative'}">
-                  ${t.result}
-                </span>
-              </div>
-            `;
-          });
+          if (p.tests_completed?.length > 0) {
+            p.tests_completed.forEach(t => {
+              testBox.innerHTML += `
+                <div class="testCard">
+                  <b>${p.name}</b> (${p.id || "N/A"})<br>
+                  Test: ${t.name}<br>
+                  Result:
+                  <span class="${
+                    t.result === "Positive" ? "test-positive" : "test-negative"
+                  }">
+                    ${t.result}
+                  </span>
+                </div>
+              `;
+            });
+          }
 
           /* PENDING TESTS */
-          p.tests_pending.forEach(t => {
-            testBox.innerHTML += `
-              <div class="testCard">
-                <b>${p.name}</b> (${p.id})<br>
-                Test: ${t}<br>
-                Status: <span class="test-pending">Pending</span>
-              </div>
-            `;
-          });
+          if (p.tests_pending?.length > 0) {
+            p.tests_pending.forEach(t => {
+              testBox.innerHTML += `
+                <div class="testCard">
+                  <b>${p.name}</b> (${p.id || "N/A"})<br>
+                  Test: ${t}<br>
+                  Status: <span class="test-pending">Pending</span>
+                </div>
+              `;
+            });
+          }
 
         });
 
       });
 
+      /* FIX EMPTY SCREEN */
+      if (testBox.innerHTML === "") {
+        testBox.innerHTML = "<p>No test records available</p>";
+      }
+
       document.getElementById("total").innerText = total;
       document.getElementById("waiting").innerText = waiting;
       document.getElementById("consult").innerText = consult;
-      document.getElementById("tests").innerText = tests;
+      document.getElementById("testsCount").innerText = testsCount;
 
+    })
+    .catch(() => {
+      document.getElementById("testData").innerHTML = "<p>Error loading data</p>";
     });
 }
 
